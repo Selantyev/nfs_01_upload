@@ -21,3 +21,8 @@ exportfs -r
 cat /etc/exports
 systemctl enable nfs-server.service
 systemctl start nfs-server.service
+
+echo "=================Firewall Enable================="
+systemctl enable firewalld.service
+systemctl start firewalld.service
+firewall-cmd --permanent --add-service=nfs && firewall-cmd --permanent --add-service=mountd && firewall-cmd --permanent --add-service=rpc-bind && firewall-cmd --reload
