@@ -11,6 +11,11 @@ mkdir -p /nfs/nfsserver10/upload
 echo "================Install nfs-utils================"
 yum install -y nfs-utils
 
+echo "=================Firewall Enable================="
+systemctl enable firewalld.service
+systemctl start firewalld.service
+firewall-cmd --permanent --add-service=nfs && firewall-cmd --permanent --add-service=mountd && firewall-cmd --permanent --add-service=rpc-bind && firewall-cmd --reload
+
 echo "===================Mount Config=================="
 echo "nfsserver:/nfs/upload /nfs/nfsserver10/upload nfs rw,sync 0 0" >> /etc/fstab
 cat /etc/fstab
